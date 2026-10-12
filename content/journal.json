@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "posts": [
+    {
+      "id": "our-story",
+      "eyebrow": "Our story",
+      "title": "The heart behind Allure Aura Creations",
+      "excerpt": "Allure grew from a love for thoughtful gifting and the little personal details that make an item feel truly yours."
+    },
+    {
+      "id": "our-process",
+      "eyebrow": "Behind the scenes",
+      "title": "A closer look at customization",
+      "excerpt": "Each order begins with your idea: the item, its colour, the words you want to add and the rhinestone colours you love."
+    },
+    {
+      "id": "meaningful-moments",
+      "eyebrow": "Events & occasions",
+      "title": "Celebrating meaningful moments",
+      "excerpt": "From birthdays and graduations to anniversaries and corporate gifting, we help mark the moment with something personal."
+    }
+  ]
+}

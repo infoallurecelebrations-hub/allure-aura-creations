@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "categories": [
+    "Mugs & Cups",
+    "Drinkware",
+    "Accessories",
+    "Bring Your Own"
+  ],
+  "products": [
+    {
+      "id": "mug",
+      "name": "Customized Mug",
+      "category": "Mugs & Cups",
+      "price": 1100,
+      "description": "Personalized with a name or short message. Detailed designs are quoted separately.",
+      "featured": true,
+      "image": ""
+    },
+    {
+      "id": "ceramic",
+      "name": "Ceramic Cup",
+      "category": "Mugs & Cups",
+      "price": 800,
+      "description": "A thoughtful everyday cup finished with your chosen name or words.",
+      "featured": true,
+      "image": ""
+    },
+    {
+      "id": "wine",
+      "name": "Wine Glass",
+      "category": "Drinkware",
+      "price": 600,
+      "description": "Name or short-text rhinestone customization, priced per glass.",
+      "featured": true,
+      "image": ""
+    },
+    {
+      "id": "stanley",
+      "name": "Stanley-Style Tumbler",
+      "category": "Drinkware",
+      "price": 2700,
+      "description": "A personalized tumbler; final pricing depends on the item and design.",
+      "featured": true,
+      "image": ""
+    },
+    {
+      "id": "thermo",
+      "name": "Thermo Bottle / Coffee Flask",
+      "category": "Drinkware",
+      "price": 1800,
+      "description": "Add a name, initials or a short phrase to an everyday favourite.",
+      "featured": true,
+      "image": ""
+    },
+    {
+      "id": "sports",
+      "name": "Sports Water Bottle",
+      "category": "Drinkware",
+      "price": 1300,
+      "description": "A personal touch for the bottle that goes everywhere with you.",
+      "featured": false,
+      "image": ""
+    },
+    {
+      "id": "mirror",
+      "name": "Pocket Mirror",
+      "category": "Accessories",
+      "price": 600,
+      "description": "A personalized compact mirror, with options based on your design.",
+      "featured": true,
+      "image": ""
+    },
+    {
+      "id": "notebook",
+      "name": "Customized Notebook",
+      "category": "Accessories",
+      "price": 1500,
+      "description": "A refined notebook with a name or a simple rhinestone design.",
+      "featured": false,
+      "image": ""
+    },
+    {
+      "id": "phone",
+      "name": "Phone Case",
+      "category": "Accessories",
+      "price": 800,
+      "description": "Tell us your phone model and design idea so we can prepare a quote.",
+      "featured": false,
+      "image": ""
+    },
+    {
+      "id": "laptop",
+      "name": "Laptop Top Customization",
+      "category": "Accessories",
+      "price": 300,
+      "description": "Customization for a laptop lid, priced according to the design.",
+      "featured": false,
+      "image": ""
+    },
+    {
+      "id": "mini-fan",
+      "name": "Mini Fan",
+      "category": "Accessories",
+      "price": 800,
+      "description": "A playful personalized accessory; model availability is confirmed first.",
+      "featured": false,
+      "image": ""
+    },
+    {
+      "id": "earpods",
+      "name": "Earpods / Pod Case",
+      "category": "Accessories",
+      "price": 1500,
+      "description": "Personalized case customization for your specific model.",
+      "featured": false,
+      "image": ""
+    },
+    {
+      "id": "headphones",
+      "name": "Headphones Customization",
+      "category": "Accessories",
+      "price": 2500,
+      "description": "Customization quoted according to the headphone model and design.",
+      "featured": false,
+      "image": ""
+    },
+    {
+      "id": "own-item",
+      "name": "Bring Your Own Item",
+      "category": "Bring Your Own",
+      "price": 700,
+      "description": "Share a photo and details first so we can confirm the item is suitable.",
+      "featured": false,
+      "image": ""
+    }
+  ],
+  "packages": [
+    {
+      "id": "birthday",
+      "name": "Birthday Glow",
+      "price": 2200,
+      "description": "A thoughtful birthday surprise with a personal finish.",
+      "includes": ["Personalized item", "Sweet treats", "Gift packaging"]
+    },
+    {
+      "id": "celebration",
+      "name": "Celebration",
+      "price": 3000,
+      "description": "A generous combination for milestones worth celebrating.",
+      "includes": [
+        "Customized gift",
+        "Sweet treats",
+        "Chocolate bar",
+        "Elegant packaging"
+      ]
+    },
+    {
+      "id": "signature",
+      "name": "Signature Gift",
+      "price": 5000,
+      "description": "A complete gifting experience, thoughtfully assembled.",
+      "includes": [
+        "Premium personalized item",
+        "Selected treats",
+        "Chocolate",
+        "Scented candle",
+        "Elegant packaging"
+      ]
+    }
+  ]
+}

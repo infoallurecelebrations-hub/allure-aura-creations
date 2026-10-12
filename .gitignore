@@ -1,0 +1,28 @@
+# Dependencies
+/node_modules
+
+# Next.js build output
+/.next
+/out
+
+# Test output
+/coverage
+/playwright-report
+/test-results
+
+# Local environment files (never commit secrets)
+.env*
+!.env.example
+.dev.vars
+.wrangler/
+
+# Vercel project metadata
+.vercel
+
+# Editors and operating systems
+.DS_Store
+*.swp
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts

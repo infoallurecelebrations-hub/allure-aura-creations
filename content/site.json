@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "business": {
+    "name": "Allure Aura Creations",
+    "currency": "KES",
+    "locale": "en-KE"
+  },
+  "contact": {
+    "email": "info.allurecelebrations@gmail.com",
+    "phone": "0797 620 633 / 0712 893 033",
+    "whatsapp": "254797620633"
+  },
+  "leadNotice": "Please place custom orders at least 2 weeks in advance.",
+  "socialLinks": [
+    {
+      "name": "Instagram",
+      "label": "@allure.aura.celebrations",
+      "url": "https://www.instagram.com/allure.aura.celebrations?igsh=MTdtajU3bmRtNDF2Zw=="
+    },
+    {
+      "name": "TikTok",
+      "label": "@allure_aura_creations",
+      "url": "https://www.tiktok.com/@allure_aura_creations?_r=1&_t=ZS-95OkqRKJj8f"
+    },
+    {
+      "name": "Facebook",
+      "label": "Allure Aura Creations",
+      "url": "https://www.facebook.com/share/18iEw2e5eP/"
+    }
+  ]
+}
