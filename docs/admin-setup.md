@@ -40,6 +40,17 @@ changed since it was loaded, then creates one atomic commit containing:
 The GitHub commit starts the normal Vercel deployment. A stale editor is
 rejected instead of overwriting a newer revision.
 
+The canonical project also has a deploy hook named `GitHub main and admin
+publishing`, connected to the repository's push webhook. It always builds
+`main`, including when a push originates from the admin's GitHub API commit.
+Treat the hook URL as a secret; it lives in Vercel and GitHub webhook settings,
+not in the app or repository. A push to another branch also rebuilds `main`.
+The duplicate Vercel project is retained and is not the admin's deployment target.
+
+The initial setup uses the existing account credential as a temporary publishing
+bridge. Replace `GITHUB_CONTENT_TOKEN` with the repository-only token described
+above to reduce its permissions; the app only requires Contents read/write.
+
 The admin loads all content from one pinned revision. Uploaded image previews
 remain visible after publishing, and authenticated image reads come from GitHub
 so refreshing the editor does not depend on the storefront deployment finishing.
