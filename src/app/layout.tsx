@@ -37,7 +37,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   };
 
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: 'try{if(localStorage.getItem("allure-storefront-theme")==="light")document.documentElement.dataset.storefrontTheme="light"}catch(e){}' }} />
+      </head>
       <body>
         {children}
         <script dangerouslySetInnerHTML={{ __html: JSON.stringify(organization).replace(/</g, "\\u003c") }} type="application/ld+json" />

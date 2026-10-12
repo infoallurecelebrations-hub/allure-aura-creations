@@ -139,6 +139,51 @@ try {
   await contact.getByRole("button", { name: "Send via WhatsApp" }).click();
   assert.ok(new URL(await page.evaluate(() => window.__opened)).searchParams.get("text").includes("A gift enquiry & a question"));
   assert.equal(await contact.locator(".form-handoff a").count(), 1);
+  const adminResponse = await page.goto(`${base}/admin/login`);
+  assert.equal(adminResponse.status(), 200);
+  const adminColors = await page.locator(".admin-login-page").evaluate((element) => [
+    getComputedStyle(element.querySelector(".admin-login-brand")).backgroundColor,
+    getComputedStyle(element.querySelector(".admin-login-panel")).backgroundColor,
+    getComputedStyle(element.querySelector(".field input")).backgroundColor,
+    getComputedStyle(element.querySelector(".field input")).color,
+    getComputedStyle(element.querySelector(".field > span")).color,
+  ]);
+  await page.goto(base);
+  assert.equal(await page.evaluate(() => localStorage.getItem("allure-storefront-theme")), null);
+  assert.equal(await page.locator(".site-shell").evaluate((element) => getComputedStyle(element).backgroundColor), "rgb(15, 14, 12)");
+  await page.getByRole("button", { name: "Switch to light mode" }).click();
+  assert.equal(await page.evaluate(() => localStorage.getItem("allure-storefront-theme")), "light");
+  assert.equal(await page.getByRole("button", { name: "Switch to dark mode" }).getAttribute("aria-pressed"), "true");
+  for (const width of [320, 390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const path of routes) {
+      await page.goto(`${base}${path}`);
+      assert.equal(await page.evaluate(() => document.documentElement.dataset.storefrontTheme), "light", `${path} persisted light mode`);
+      assert.equal(await page.locator(".site-shell").evaluate((element) => getComputedStyle(element).backgroundColor), "rgb(248, 244, 236)", `${path} light background`);
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${path} light mode overflow at ${width}px`);
+      assert.equal(await page.getByRole("button", { name: "Switch to dark mode" }).getAttribute("aria-pressed"), "true");
+      if (path === "/customize" || path === "/contact") {
+        assert.equal(await page.locator(".field input").first().evaluate((element) => getComputedStyle(element).backgroundColor), "rgb(255, 253, 248)");
+      }
+      if ([390, 1440].includes(width) && ["/", "/customize", "/packages", "/contact"].includes(path)) {
+        await page.screenshot({ path: `test-results/storefront/light-${path.slice(1) || "home"}-${width}.png`, fullPage: true });
+      }
+    }
+    console.log(`PASS light theme public routes at ${width}px`);
+  }
+  await page.goto(`${base}/admin/login`);
+  assert.equal(await page.locator(".theme-toggle").count(), 0);
+  assert.deepEqual(await page.locator(".admin-login-page").evaluate((element) => [
+    getComputedStyle(element.querySelector(".admin-login-brand")).backgroundColor,
+    getComputedStyle(element.querySelector(".admin-login-panel")).backgroundColor,
+    getComputedStyle(element.querySelector(".field input")).backgroundColor,
+    getComputedStyle(element.querySelector(".field input")).color,
+    getComputedStyle(element.querySelector(".field > span")).color,
+  ]), adminColors);
+  await page.goto(base);
+  await page.getByRole("button", { name: "Switch to dark mode" }).click();
+  assert.equal(await page.locator(".site-shell").evaluate((element) => getComputedStyle(element).backgroundColor), "rgb(15, 14, 12)");
+  assert.equal(await page.evaluate(() => localStorage.getItem("allure-storefront-theme")), "dark");
   assert.deepEqual(errors, []);
   assert.deepEqual(failedAssets, []);
   assert.equal((await context.request.get(`${base}/a-page-that-does-not-exist`)).status(), 404);

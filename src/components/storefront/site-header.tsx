@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 
 import { Menu, X } from "@/components/ui/icons";
 import { storefrontNavigation } from "@/lib/config/navigation";
+import { ThemeToggle } from "./theme-toggle";
 
 export function SiteHeader({ leadNotice }: { leadNotice: string }) {
   const pathname = usePathname();
@@ -32,19 +33,6 @@ export function SiteHeader({ leadNotice }: { leadNotice: string }) {
             </span>
           </Link>
 
-          <button
-            ref={menuButton}
-            aria-controls="storefront-navigation"
-            aria-expanded={open}
-            aria-label={open ? "Close navigation" : "Open navigation"}
-            className="menu-button"
-            onClick={() => setOpen((value) => !value)}
-            type="button"
-          >
-            {open ? <X /> : <Menu />}
-            <span>{open ? "Close" : "Menu"}</span>
-          </button>
-
           <nav id="storefront-navigation" className={`site-nav${open ? " site-nav--open" : ""}`} aria-label="Main navigation">
             {storefrontNavigation.map((item) => {
               const active = pathname === item.href;
@@ -56,7 +44,22 @@ export function SiteHeader({ leadNotice }: { leadNotice: string }) {
             })}
           </nav>
 
-          <Link className="header-cta" href="/customize">Start an order</Link>
+          <div className="header-actions">
+            <Link className="header-cta" href="/customize">Start an order</Link>
+            <ThemeToggle />
+            <button
+              ref={menuButton}
+              aria-controls="storefront-navigation"
+              aria-expanded={open}
+              aria-label={open ? "Close navigation" : "Open navigation"}
+              className="menu-button"
+              onClick={() => setOpen((value) => !value)}
+              type="button"
+            >
+              {open ? <X /> : <Menu />}
+              <span>{open ? "Close" : "Menu"}</span>
+            </button>
+          </div>
         </div>
       </header>
     </>

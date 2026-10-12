@@ -20,6 +20,8 @@ Run `npm run build` followed by `npm run test:storefront`. The same
 server on port 3188 and checks all eight public pages at the same five widths,
 internal links, navigation, catalogue prices and filters, product/package order
 links, query-price tampering, form validation, and WhatsApp handoff fallbacks.
+It also checks both storefront themes, saved preference across page loads, and
+that the admin login styling remains unchanged when light mode is selected.
 WhatsApp windows are intercepted; no messages are sent.
 
 To check a deployment instead of starting a local server, set
