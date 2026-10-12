@@ -51,7 +51,6 @@ export function ThemeToggle() {
       type="button"
     >
       {light ? <Moon /> : <Sun />}
-      <span>{light ? "Dark" : "Light"}</span>
     </button>
   );
 }
