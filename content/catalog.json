@@ -140,7 +140,11 @@
       "name": "Birthday Glow",
       "price": 2200,
       "description": "A thoughtful birthday surprise with a personal finish.",
-      "includes": ["Personalized item", "Sweet treats", "Gift packaging"]
+      "includes": [
+        "Personalized item",
+        "Sweet treats",
+        "Gift packaging"
+      ]
     },
     {
       "id": "celebration",
