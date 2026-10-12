@@ -1,13 +1,16 @@
 "use client";
 
-import type { FormEvent } from "react";
+import { type FormEvent, useState } from "react";
 
 import { ArrowUpRight } from "@/components/ui/icons";
 import { whatsappUrl } from "@/lib/content";
+import { clearFieldError, validateRequestForm } from "./form-validation";
 
 export function ContactForm() {
+  const [readyUrl, setReadyUrl] = useState("");
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!validateRequestForm(event.currentTarget)) return;
     const data = new FormData(event.currentTarget);
     const message = [
       "Hello Allure Aura Creations! I have an enquiry.",
@@ -17,11 +20,13 @@ export function ContactForm() {
       `About: ${data.get("type")}`,
       `Message: ${data.get("message")}`,
     ].join("\n");
-    window.open(whatsappUrl(message), "_blank", "noopener,noreferrer");
+    const url = whatsappUrl(message);
+    setReadyUrl(url);
+    window.open(url, "_blank", "noopener,noreferrer");
   }
 
   return (
-    <form className="contact-form" onSubmit={submit}>
+    <form className="contact-form" onChange={(event) => { clearFieldError(event); setReadyUrl(""); }} onSubmit={submit}>
       <p className="eyebrow">Send an enquiry</p>
       <h2>Tell us what you’re imagining.</h2>
       <div className="field-grid">
@@ -32,6 +37,7 @@ export function ContactForm() {
       <label className="field"><span>Message *</span><textarea name="message" placeholder="How can we help?" required rows={6} /></label>
       <button className="button button--large" type="submit">Send via WhatsApp <ArrowUpRight /></button>
       <p className="form-fineprint">Your message opens in WhatsApp for you to review before sending.</p>
+      {readyUrl ? <p className="form-handoff" role="status">Your message is ready. <a href={readyUrl} target="_blank" rel="noopener noreferrer">Open WhatsApp if it didn’t open automatically.</a></p> : null}
     </form>
   );
 }

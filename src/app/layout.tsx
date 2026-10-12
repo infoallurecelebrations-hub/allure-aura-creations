@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import { site } from "@/lib/content";
 
 import "./globals.css";
 
@@ -28,9 +29,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const organization = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: "Allure Aura Creations",
+    name: site.business.name,
     description: "Luxury gifting and personalization studio in Nairobi, Kenya.",
-    email: "info.allurecelebrations@gmail.com",
+    email: site.contact.email,
     areaServed: "Nairobi, Kenya",
     url: "https://allure-aura-creations.vercel.app",
   };
@@ -39,7 +40,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" data-scroll-behavior="smooth">
       <body>
         {children}
-        <script dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }} type="application/ld+json" />
+        <script dangerouslySetInnerHTML={{ __html: JSON.stringify(organization).replace(/</g, "\\u003c") }} type="application/ld+json" />
       </body>
     </html>
   );

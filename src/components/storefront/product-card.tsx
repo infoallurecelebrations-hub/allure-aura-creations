@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ProductArt } from "./product-art";
 
 export function ProductCard({ product }: { product: Product }) {
-  const query = new URLSearchParams({ item: product.name, price: String(product.price) });
+  const query = new URLSearchParams({ product: product.id });
 
   return (
     <article className="product-card">

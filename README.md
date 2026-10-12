@@ -26,6 +26,7 @@ npm run lint
 npm run typecheck
 npm test
 npm run test:admin
+npm run test:storefront # requires npm run build first
 npm run build
 npm run admin:hash-password
 ```

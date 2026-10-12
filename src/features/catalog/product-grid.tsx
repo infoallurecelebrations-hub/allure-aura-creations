@@ -25,6 +25,7 @@ export function ProductGrid({ categories, products }: { categories: string[]; pr
         ))}
       </div>
       <p className="result-count" aria-live="polite">Showing {visible.length} {visible.length === 1 ? "piece" : "pieces"}</p>
+      {!visible.length ? <div className="empty-state"><h2>Something personal is on its way.</h2><p>Our collection is being refreshed. Contact the studio to discuss your idea.</p></div> : null}
       <div className="product-grid">
         {visible.map((product) => <ProductCard key={product.id} product={product} />)}
       </div>

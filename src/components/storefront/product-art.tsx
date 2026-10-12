@@ -1,10 +1,14 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 import type { Product } from "@/lib/content";
 
 export function ProductArt({ product }: { product: Product }) {
-  if (product.image) {
-    return <Image alt={product.name} className="product-art__image" fill sizes="(max-width: 680px) 100vw, (max-width: 1080px) 50vw, 25vw" src={product.image} />;
+  const [failedPath, setFailedPath] = useState("");
+  if (product.image && failedPath !== product.image) {
+    return <Image alt={product.name} className="product-art__image" fill onError={() => setFailedPath(product.image)} sizes="(max-width: 580px) 100vw, (max-width: 800px) 50vw, 33vw" src={product.image} />;
   }
 
   const kind = product.category === "Drinkware"

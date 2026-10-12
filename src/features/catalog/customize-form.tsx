@@ -4,19 +4,34 @@ import { useSearchParams } from "next/navigation";
 import { type FormEvent, useState } from "react";
 
 import { ArrowUpRight, MessageCircle } from "@/components/ui/icons";
-import { formatPrice, site, whatsappUrl } from "@/lib/content";
+import { catalog, formatPrice, site, whatsappUrl } from "@/lib/content";
+import { clearFieldError, validateRequestForm } from "./form-validation";
 
 const stones = ["Crystal Clear", "AB Crystal", "Gold", "Siam Red", "Citrine", "Other / discuss"];
 
 export function CustomizeForm() {
   const searchParams = useSearchParams();
+  const selectedProduct = catalog.products.find((product) => product.id === searchParams.get("product"));
+  const selectedPackage = catalog.packages.find((giftPackage) => giftPackage.id === searchParams.get("package"));
+  const initialItem = selectedProduct?.name ?? (selectedPackage ? `${selectedPackage.name} Package` : (searchParams.get("item") ?? "").slice(0, 120));
+  return <OrderForm key={initialItem} initialItem={initialItem} />;
+}
+
+function OrderForm({ initialItem }: { initialItem: string }) {
   const [delivery, setDelivery] = useState("");
-  const [item, setItem] = useState(() => searchParams.get("item") ?? "");
-  const requestedPrice = Number(searchParams.get("price"));
-  const price = Number.isFinite(requestedPrice) && requestedPrice > 0 ? formatPrice(requestedPrice) : "";
+  const [item, setItem] = useState(initialItem);
+  const [readyUrl, setReadyUrl] = useState("");
+  const [today] = useState(() => {
+    const now = new Date();
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+  });
+  const selected = catalog.products.find((product) => product.name === item.trim())
+    ?? catalog.packages.find((giftPackage) => `${giftPackage.name} Package` === item.trim());
+  const price = selected ? formatPrice(selected.price) : "";
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!validateRequestForm(event.currentTarget)) return;
     const data = new FormData(event.currentTarget);
     const selectedStones = data.getAll("stones").join(", ") || "To discuss";
     const lines = [
@@ -37,11 +52,13 @@ export function CustomizeForm() {
       data.get("designNotes") ? `Extra details: ${data.get("designNotes")}` : "",
     ].filter(Boolean);
 
-    window.open(whatsappUrl(lines.join("\n")), "_blank", "noopener,noreferrer");
+    const url = whatsappUrl(lines.join("\n"));
+    setReadyUrl(url);
+    window.open(url, "_blank", "noopener,noreferrer");
   }
 
   return (
-    <form className="order-form" onSubmit={submit}>
+    <form className="order-form" onChange={(event) => { clearFieldError(event); setReadyUrl(""); }} onSubmit={submit}>
       <div className="form-section">
         <div className="form-section__number">01</div>
         <div className="form-section__content">
@@ -81,13 +98,14 @@ export function CustomizeForm() {
             <label className="field"><span>Contact number *</span><input name="customerPhone" autoComplete="tel" inputMode="tel" placeholder="07xx xxx xxx" required /></label>
           </div>
           <div className="field-grid">
-            <label className="field"><span>When do you need it?</span><input name="needDate" type="date" /></label>
+            <label className="field"><span>When do you need it?</span><input min={today} name="needDate" type="date" /></label>
             <label className="field"><span>Timeline</span><select name="timeline"><option>Standard — at least 2 weeks</option><option>Faster — please check availability</option></select></label>
           </div>
           <label className="field"><span>Extra details or package idea</span><textarea name="designNotes" placeholder="Design placement, number of items, occasion, budget or anything else…" rows={5} /></label>
           <div className="lead-note"><MessageCircle /><p><strong>Good to know:</strong> {site.leadNotice} Faster service depends on item and rhinestone availability.</p></div>
           <button className="button button--large" type="submit">Continue to WhatsApp <ArrowUpRight /></button>
           <p className="form-fineprint">WhatsApp opens with your request ready. Nothing is sent until you press Send there.</p>
+          {readyUrl ? <p className="form-handoff" role="status">Your request is ready. <a href={readyUrl} target="_blank" rel="noopener noreferrer">Open WhatsApp if it didn’t open automatically.</a></p> : null}
         </div>
       </div>
     </form>

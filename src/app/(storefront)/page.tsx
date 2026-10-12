@@ -6,7 +6,7 @@ import { PackageCard } from "@/components/storefront/package-card";
 import { ProductCard } from "@/components/storefront/product-card";
 import { SectionHeading } from "@/components/storefront/section-heading";
 import { ArrowRight, ArrowUpRight, Clock, Gift, Heart, Sparkle } from "@/components/ui/icons";
-import { catalog } from "@/lib/content";
+import { catalog, site } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Personalized Gifts in Nairobi",
@@ -52,7 +52,7 @@ export default function HomePage() {
         <div className="container promise-bar__grid">
           <div><Sparkle /><span><strong>Personal details</strong>Made around your story</span></div>
           <div><Gift /><span><strong>Elegant presentation</strong>Packaging to complete the moment</span></div>
-          <div><Clock /><span><strong>Thoughtful timing</strong>Allow at least two weeks</span></div>
+          <div><Clock /><span><strong>Thoughtful timing</strong>{site.leadNotice}</span></div>
         </div>
       </section>
 
@@ -95,7 +95,7 @@ export default function HomePage() {
         <div className="container">
           <SectionHeading centered description="Choose a thoughtful starting point, then make every detail your own." eyebrow="Gifts, composed with care" title={<>More to open. More to <em>remember.</em></>} />
           <div className="package-grid">
-            {catalog.packages.map((giftPackage, index) => <PackageCard featured={index === 2} giftPackage={giftPackage} key={giftPackage.id} />)}
+            {catalog.packages.map((giftPackage, index) => <PackageCard index={index} featured={index === 2} giftPackage={giftPackage} key={giftPackage.id} />)}
           </div>
         </div>
       </section>

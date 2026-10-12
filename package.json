@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/unit/*.test.mjs",
     "test:admin": "node tests/e2e/admin-smoke.mjs",
+    "test:storefront": "node tests/e2e/storefront-smoke.mjs",
     "admin:hash-password": "node scripts/hash-password.mjs"
   },
   "dependencies": {

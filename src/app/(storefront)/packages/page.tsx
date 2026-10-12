@@ -17,7 +17,7 @@ export default function PackagesPage() {
         eyebrow="A thoughtful combination"
         title={<>Gift <em>packages.</em></>}
       />
-      <section className="section"><div className="container"><div className="package-grid">{catalog.packages.map((giftPackage, index) => <PackageCard featured={index === 2} giftPackage={giftPackage} key={giftPackage.id} />)}</div>
+      <section className="section"><div className="container"><div className="package-grid">{catalog.packages.map((giftPackage, index) => <PackageCard index={index} featured={index === 2} giftPackage={giftPackage} key={giftPackage.id} />)}</div>
         <div className="bespoke-banner"><div><p className="eyebrow">Made your way</p><h2>Build a package entirely <em>of your own.</em></h2><p>Mix and match items, add treats or a personal message, and tell us your occasion and budget.</p></div><Link className="button button--large" href="/customize?item=Custom+Gift+Package">Create your package <ArrowUpRight /></Link></div>
       </div></section>
     </>

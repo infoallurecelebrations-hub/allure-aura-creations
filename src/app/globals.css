@@ -96,6 +96,22 @@ h2 em {
   min-height: 100vh;
 }
 
+.skip-link {
+  background: var(--gold-light);
+  color: var(--ink);
+  left: 1rem;
+  padding: 0.75rem 1rem;
+  position: fixed;
+  top: 0.5rem;
+  transform: translateY(-150%);
+  z-index: 100;
+}
+.skip-link:focus { transform: translateY(0); }
+#main-content { scroll-margin-top: 6rem; }
+.site-shell p, .site-shell h2, .site-shell h3, .footer-links a { overflow-wrap: anywhere; }
+.form-handoff { border: 1px solid var(--line); color: var(--cream); padding: 1rem; margin-top: 1rem; }
+.form-handoff a { color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px; }
+
 .container {
   margin-inline: auto;
   max-width: 1240px;
@@ -2518,6 +2534,8 @@ h2 em {
 
   .site-nav--open {
     display: flex;
+    max-height: calc(100dvh - 6rem);
+    overflow-y: auto;
   }
 
   .site-nav a {
