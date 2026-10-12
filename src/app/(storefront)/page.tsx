@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
+import { HeroProduct } from "@/components/storefront/hero-product";
 import { PackageCard } from "@/components/storefront/package-card";
 import { ProductCard } from "@/components/storefront/product-card";
 import { SectionHeading } from "@/components/storefront/section-heading";
@@ -15,37 +15,24 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const featured = catalog.products.filter((product) => product.featured).slice(0, 8);
+  const heroProduct = featured.find((product) => product.image) ?? catalog.products.find((product) => product.image);
 
   return (
     <>
       <section className="home-hero">
-        <div className="ambient ambient--hero" />
         <div className="container home-hero__grid">
           <div className="home-hero__copy">
-            <p className="eyebrow">Luxury gifting & personalization studio · Nairobi</p>
-            <h1>Make it yours.<br /><em>Make it unforgettable.</em></h1>
-            <p className="home-hero__lead">Everyday favourites, transformed into keepsakes through thoughtful details, a little sparkle and your personal story.</p>
-            <div className="button-row">
-              <Link className="button button--large" href="/studio">Explore the studio <ArrowUpRight /></Link>
-              <Link className="button button--ghost button--large" href="/customize">Create something personal</Link>
+            <p className="eyebrow">Personalized gifts · Nairobi</p>
+            <h1>Their name.<br />Their colour.<br /><em>Their kind of gift.</em></h1>
+            <p className="home-hero__lead">Personalized mugs, tumblers and gift packages, made in Nairobi. Choose a piece, then add the details that make it theirs.</p>
+            <div className="home-hero__actions">
+              <Link className="button button--large" href="/studio">Find their gift <ArrowUpRight /></Link>
+              <Link className="home-hero__enquiry" href="/customize">Have something in mind? <ArrowRight /></Link>
             </div>
-            <div className="hero-proof">
-              <span><Sparkle /> Personalized by hand</span>
-              <span><Gift /> Gift-ready options</span>
-            </div>
+            <p className="home-hero__details">Names, words & rhinestone details.</p>
           </div>
-
-          <div className="hero-object" aria-label="Allure Aura Creations emblem">
-            <span className="hero-object__orbit hero-object__orbit--outer" />
-            <span className="hero-object__orbit hero-object__orbit--inner" />
-            <div className="hero-object__emblem">
-              <Image alt="Allure Aura Creations emblem" fill priority sizes="(max-width: 800px) 72vw, 38vw" src="/brand/emblem.png" />
-            </div>
-            <span className="floating-note floating-note--top">Ordinary made extraordinary</span>
-            <span className="floating-note floating-note--bottom">Made with intention</span>
-          </div>
+          <HeroProduct product={heroProduct} />
         </div>
-        <div className="hero-scroll"><span>Discover</span><span aria-hidden="true" /></div>
       </section>
 
       <section className="promise-bar" aria-label="Our promises">
