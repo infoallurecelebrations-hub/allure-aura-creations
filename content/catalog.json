@@ -122,7 +122,7 @@
       "price": 2500,
       "description": "Customization quoted according to the headphone model and design.",
       "featured": false,
-      "image": ""
+      "image": "/uploads/products/headphones-3c318904-8bde-4e88-b879-a7a6ec649906.webp"
     },
     {
       "id": "own-item",
@@ -131,7 +131,7 @@
       "price": 700,
       "description": "Share a photo and details first so we can confirm the item is suitable.",
       "featured": false,
-      "image": ""
+      "image": "/uploads/products/own-item-3ca62f8e-27ed-4678-944a-15032ab292b7.webp"
     }
   ],
   "packages": [
