@@ -86,7 +86,7 @@
       "price": 800,
       "description": "Tell us your phone model and design idea so we can prepare a quote.",
       "featured": false,
-      "image": ""
+      "image": "/uploads/products/phone-0a115e22-103a-4e30-a678-e7ec58823d2b.webp"
     },
     {
       "id": "laptop",
@@ -95,7 +95,7 @@
       "price": 300,
       "description": "Customization for a laptop lid, priced according to the design.",
       "featured": false,
-      "image": ""
+      "image": "/uploads/products/laptop-70d40838-6f98-4b1f-aa09-c75bfb3098eb.webp"
     },
     {
       "id": "mini-fan",
@@ -104,7 +104,7 @@
       "price": 800,
       "description": "A playful personalized accessory; model availability is confirmed first.",
       "featured": false,
-      "image": ""
+      "image": "/uploads/products/mini-fan-2e51d294-8376-4056-8be5-85a2dce8d72a.webp"
     },
     {
       "id": "earpods",
@@ -113,7 +113,7 @@
       "price": 1500,
       "description": "Personalized case customization for your specific model.",
       "featured": false,
-      "image": ""
+      "image": "/uploads/products/earpods-f3d0c516-970d-4522-ab78-8d49827f2cae.webp"
     },
     {
       "id": "headphones",
