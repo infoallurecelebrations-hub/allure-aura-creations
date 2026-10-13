@@ -14,7 +14,7 @@
       "price": 1100,
       "description": "Personalized with a name or short message. Detailed designs are quoted separately.",
       "featured": true,
-      "image": ""
+      "image": "/uploads/products/mug-8c48f941-8281-406a-8d09-d784dbe7e097.webp"
     },
     {
       "id": "ceramic",
@@ -23,7 +23,7 @@
       "price": 800,
       "description": "A thoughtful everyday cup finished with your chosen name or words.",
       "featured": true,
-      "image": ""
+      "image": "/uploads/products/ceramic-8a85bbbf-f9cc-4ac2-96a4-16f561692f66.webp"
     },
     {
       "id": "wine",
@@ -32,7 +32,7 @@
       "price": 600,
       "description": "Name or short-text rhinestone customization, priced per glass.",
       "featured": true,
-      "image": ""
+      "image": "/uploads/products/wine-7d4166d4-1777-4269-9f1c-60325e7dea73.webp"
     },
     {
       "id": "stanley",
@@ -41,7 +41,7 @@
       "price": 2700,
       "description": "A personalized tumbler; final pricing depends on the item and design.",
       "featured": true,
-      "image": ""
+      "image": "/uploads/products/stanley-a3531370-ef2a-4d73-bddb-706e9004e95b.webp"
     },
     {
       "id": "thermo",
