@@ -1,12 +1,30 @@
 {
   "schemaVersion": 1,
   "categories": [
+    "Accessories",
     "Mugs & Cups",
     "Drinkware",
-    "Accessories",
     "Bring Your Own"
   ],
   "products": [
+    {
+      "id": "product-9caba3df-ead5-4a52-9a66-c4c105801503",
+      "name": "Full length mirror",
+      "category": "Accessories",
+      "price": 3500,
+      "description": "Add a product description.",
+      "featured": false,
+      "image": ""
+    },
+    {
+      "id": "product-832873ed-b804-479e-8617-6e004f7f729d",
+      "name": "Hairbrush",
+      "category": "Accessories",
+      "price": 800,
+      "description": "Add a product description.",
+      "featured": false,
+      "image": "/uploads/products/product-832873ed-b804-479e-8617-6e004f7f729d-cc76f559-5642-45ea-a2e6-ad34fcb72ced.webp"
+    },
     {
       "id": "mug",
       "name": "Customized Mug",
