@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 import { HeroProduct } from "@/components/storefront/hero-product";
@@ -16,6 +17,8 @@ export const metadata: Metadata = {
 export default function HomePage() {
   const featured = catalog.products.filter((product) => product.featured).slice(0, 8);
   const heroProduct = featured.find((product) => product.image) ?? catalog.products.find((product) => product.image);
+  const storyProduct = catalog.products.find((product) => product.id === "own-item" && product.image)
+    ?? catalog.products.find((product) => product.image);
 
   return (
     <>
@@ -23,7 +26,11 @@ export default function HomePage() {
         <div className="container home-hero__grid">
           <div className="home-hero__copy">
             <p className="eyebrow">Personalized gifts · Nairobi</p>
-            <h1>Their name.<br />Their colour.<br /><em>Their kind of gift.</em></h1>
+            <h1>
+              <span>Thoughtfully chosen.</span>
+              <span><em>Beautifully personalized.</em></span>
+              <span>Unmistakable Aura.</span>
+            </h1>
             <p className="home-hero__lead">Personalized mugs, tumblers and gift packages, made in Nairobi. Choose a piece, then add the details that make it theirs.</p>
             <div className="home-hero__actions">
               <Link className="button button--large" href="/studio">Find their gift <ArrowUpRight /></Link>
@@ -58,11 +65,16 @@ export default function HomePage() {
 
       <section className="section story-section">
         <div className="container story-grid">
-          <div className="story-art" aria-hidden="true">
-            <span className="story-art__frame" />
-            <span className="story-art__ribbon">Your words here</span>
-            <div className="story-art__piece"><span>A</span></div>
-            <span className="story-art__caption">One of one</span>
+          <div className="story-art">
+            {storyProduct ? (
+              <Image
+                alt="A collection of personalized rhinestone gifts by Allure Aura Creations"
+                className="story-art__image"
+                fill
+                sizes="(max-width: 820px) 100vw, 42vw"
+                src={storyProduct.image}
+              />
+            ) : null}
           </div>
           <div className="story-copy">
             <p className="eyebrow">More than a gift</p>

@@ -443,6 +443,10 @@ h2 em {
   display: inline-block;
 }
 
+.home-hero h1 span {
+  display: block;
+}
+
 .home-hero__lead {
   color: #c9c0b1;
   font-size: 1rem;
@@ -826,61 +830,17 @@ h2 em {
 }
 
 .story-art {
-  aspect-ratio: 0.88;
-  background: radial-gradient(circle at 50% 40%, #4a3a23, #1d1811 60%);
+  aspect-ratio: 4 / 3;
+  background: var(--surface);
   border: 1px solid var(--line);
-  max-width: 31rem;
+  max-width: 34rem;
+  overflow: hidden;
   position: relative;
+  width: 100%;
 }
 
-.story-art__frame {
-  border: 1px solid rgb(224 193 127 / 22%);
-  inset: 1.25rem;
-  position: absolute;
-}
-
-.story-art__piece {
-  align-items: center;
-  background: linear-gradient(145deg, #ddc9a4, #a68958);
-  border-radius: 0.5rem 0.5rem 2.2rem 2.2rem;
-  bottom: 12%;
-  box-shadow: var(--shadow);
-  display: flex;
-  justify-content: center;
-  left: 31%;
-  position: absolute;
-  top: 17%;
-  transform: rotate(-4deg);
-  width: 38%;
-}
-
-.story-art__piece span {
-  color: #58421e;
-  font-family: var(--serif);
-  font-size: 5rem;
-  font-style: italic;
-}
-
-.story-art__ribbon,
-.story-art__caption {
-  backdrop-filter: blur(8px);
-  background: rgb(15 14 12 / 82%);
-  border: 1px solid var(--line);
-  color: var(--gold-light);
-  font-family: var(--serif);
-  padding: 0.7rem 0.9rem;
-  position: absolute;
-  z-index: 2;
-}
-
-.story-art__ribbon {
-  right: -1.5rem;
-  top: 24%;
-}
-
-.story-art__caption {
-  bottom: 17%;
-  left: -1.5rem;
+.story-art__image {
+  object-fit: cover;
 }
 
 .story-copy h2,
@@ -2853,14 +2813,6 @@ h2 em {
     min-height: auto;
   }
 
-  .story-art__ribbon {
-    right: -0.5rem;
-  }
-
-  .story-art__caption {
-    left: -0.5rem;
-  }
-
   .page-hero h1 {
     font-size: clamp(3rem, 15vw, 4.8rem);
   }
@@ -2974,9 +2926,7 @@ html[data-storefront-theme="light"] .site-shell .story-art {
   color: #f4eddf;
 }
 
-html[data-storefront-theme="light"] .site-shell .product-card__category,
-html[data-storefront-theme="light"] .site-shell .story-art__ribbon,
-html[data-storefront-theme="light"] .site-shell .story-art__caption {
+html[data-storefront-theme="light"] .site-shell .product-card__category {
   color: #e0c17f;
 }
 
