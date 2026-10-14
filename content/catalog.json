@@ -13,7 +13,7 @@
       "category": "Accessories",
       "price": 3500,
       "description": "Add a product description.",
-      "featured": true,
+      "featured": false,
       "image": "/uploads/products/product-9caba3df-ead5-4a52-9a66-c4c105801503-e4b163c2-ec21-45a1-900a-0939c9a60d3c.webp"
     },
     {
@@ -22,7 +22,7 @@
       "category": "Accessories",
       "price": 800,
       "description": "Add a product description.",
-      "featured": true,
+      "featured": false,
       "image": "/uploads/products/product-832873ed-b804-479e-8617-6e004f7f729d-cc76f559-5642-45ea-a2e6-ad34fcb72ced.webp"
     },
     {
