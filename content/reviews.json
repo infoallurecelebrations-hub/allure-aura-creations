@@ -1,4 +1,23 @@
 {
   "schemaVersion": 1,
-  "reviews": []
+  "reviews": [
+    {
+      "id": "review-dd2f26b5-7521-41fb-be43-98d58c66ae1e",
+      "name": "Hope Liana",
+      "text": "I really loved my couple package 💯Thank you❤",
+      "stars": 5
+    },
+    {
+      "id": "review-a8bf1851-77b2-4be9-80b9-d93a593a033d",
+      "name": "Titus Githaiga",
+      "text": "The Allure touch on my laptop is vivid and unique. Thank you for the master-piece",
+      "stars": 5
+    },
+    {
+      "id": "review-a84ddb3a-8737-4626-b0bc-9c92794ee865",
+      "name": "Peter Kahoti",
+      "text": "She really loved the Stanley Cup🙂Thank you for helping me make her happy💯 l am sure to come back for more",
+      "stars": 5
+    }
+  ]
 }
