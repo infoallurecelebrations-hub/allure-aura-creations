@@ -259,38 +259,58 @@
     },
     {
       "id": "package-503a2a9e-3639-4e9b-a3a3-4605764dbec1",
-      "name": "New package",
-      "price": 0,
-      "description": "Add a package description.",
+      "name": "Men Packages",
+      "price": 2500,
+      "description": "The Gentleman's Essentials\nSimple. Refined. Unmistakably him.",
       "includes": [
-        "Personalized item"
+        "Customized Premium notebook",
+        "Quality signature pen",
+        "Chocolate bar and sweet treats/ his favorite snacks of choice",
+        "Personalized message card",
+        "Luxury packaging"
       ]
     },
     {
       "id": "package-671df010-2c99-4fa8-8d13-7377c06d3e71",
-      "name": "New package",
-      "price": 0,
-      "description": "Add a package description.",
+      "name": "The Everyday King",
+      "price": 4000,
+      "description": "Made for the man who shows up every day.",
       "includes": [
-        "Personalized item"
+        "Personalized thermo bottle/travel mug",
+        "Quality body spray",
+        "Customized belt/ wallet",
+        "A personalized card",
+        "Coordinated gift packaging"
       ]
     },
     {
       "id": "package-dedc199b-15fe-4470-b718-8bb95c6d0330",
-      "name": "New package",
-      "price": 0,
-      "description": "Add a package description.",
+      "name": "The Executive Standard",
+      "price": 8500,
+      "description": "A sophisticated gift for a man who values quality and presentation.",
       "includes": [
-        "Personalized item"
+        "Customized Wallet/belt",
+        "Customized travel tumbler",
+        "Quality perfume",
+        "Customized notebook",
+        "Snacks of choice/ skin care routine package",
+        "A handwritten appreciation card",
+        "Luxury gift box"
       ]
     },
     {
       "id": "package-6a8a530e-72f3-480d-9488-1f662062e26a",
-      "name": "New package",
-      "price": 0,
-      "description": "Add a package description.",
+      "name": "The Man of the Moment",
+      "price": 10000,
+      "description": "Some men deserve a moment that speaks for itself",
       "includes": [
-        "Personalized item"
+        "Customized insulated tumbler/ stanley cup",
+        "Customized Wallet or cardholder",
+        "Customized headphones",
+        "Quality watch or premium accessory",
+        "Premium perfume",
+        "Premium chocolates/ snacks of choice",
+        "Premium luxury packaging"
       ]
     }
   ]
