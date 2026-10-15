@@ -196,6 +196,102 @@
         "Coordinated gift packaging",
         "Cake (as from 1 kg) optional"
       ]
+    },
+    {
+      "id": "package-9d1b2e12-e2c4-446f-85c5-5abc20cb2701",
+      "name": "The Main Character Experience",
+      "price": 8500,
+      "description": "The ultimate expression of birthday luxury for someone who should feel celebrated from the moment the package arrives.",
+      "includes": [
+        "One customized tumbler or Stanley cup",
+        "One quality perfume or body-mist gift",
+        "One mini bouquet of fresh or artificial flowers",
+        "One premium chocolate or confectionery selection",
+        "One scented candle",
+        "One keepsake card with a heartfelt personal message",
+        "A birthday sash or small celebration accessory",
+        "1kg cake (flavor of choice)",
+        "Premium presentation box with layered tissue and ribbon"
+      ]
+    },
+    {
+      "id": "package-822c9ee1-f73b-4374-b3c6-53c58a5a137b",
+      "name": "Graduation packages",
+      "price": 2500,
+      "description": "The Next Chapter\nYou did it. Now go write your next story.",
+      "includes": [
+        "One customized notebook",
+        "One signature pen",
+        "One chocolate bar",
+        "A selection of sweet treats",
+        "A graduation congratulations card with a heartfelt message",
+        "Elegant packaging"
+      ]
+    },
+    {
+      "id": "package-51233e6a-1c5f-49fe-a7b7-7be10fecd871",
+      "name": "The Earned It Edition",
+      "price": 3500,
+      "description": "This wasn't luck. You worked for this.",
+      "includes": [
+        "One customized thermo bottl/ water bottle",
+        "A customized notebook with signature pen",
+        "One chocolate bar or premium chocolate selection",
+        "Sweet treats",
+        "A personalized graduation card",
+        "Premium gift packaging"
+      ]
+    },
+    {
+      "id": "package-3621fc8b-7155-4d14-b0da-cdaa67e7ad3d",
+      "name": "The Limitless Legacy",
+      "price": 8500,
+      "description": "The degree is the achievement. Your future is the legacy.",
+      "includes": [
+        "A customized Stanley-style cup/ tumbler",
+        "A perfume or body mist",
+        "One mini bouquet of fresh or artificial flowers",
+        "One premium chocolate selection",
+        "One graduation keepsake card featuring a personalized message",
+        "A framed graduation photo or personalized photo keepsake/ teddy bear",
+        "Luxury gift box packaging"
+      ]
+    },
+    {
+      "id": "package-503a2a9e-3639-4e9b-a3a3-4605764dbec1",
+      "name": "New package",
+      "price": 0,
+      "description": "Add a package description.",
+      "includes": [
+        "Personalized item"
+      ]
+    },
+    {
+      "id": "package-671df010-2c99-4fa8-8d13-7377c06d3e71",
+      "name": "New package",
+      "price": 0,
+      "description": "Add a package description.",
+      "includes": [
+        "Personalized item"
+      ]
+    },
+    {
+      "id": "package-dedc199b-15fe-4470-b718-8bb95c6d0330",
+      "name": "New package",
+      "price": 0,
+      "description": "Add a package description.",
+      "includes": [
+        "Personalized item"
+      ]
+    },
+    {
+      "id": "package-6a8a530e-72f3-480d-9488-1f662062e26a",
+      "name": "New package",
+      "price": 0,
+      "description": "Add a package description.",
+      "includes": [
+        "Personalized item"
+      ]
     }
   ]
 }
