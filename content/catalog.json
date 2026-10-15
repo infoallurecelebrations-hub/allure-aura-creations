@@ -155,38 +155,46 @@
   "packages": [
     {
       "id": "birthday",
-      "name": "Birthday Glow",
+      "name": "Birthday Packages",
       "price": 2200,
-      "description": "A thoughtful birthday surprise with a personal finish.",
+      "description": "The Soft Launch\nDesigned for someone who wants to make a thoughtful birthday gesture without needing a huge hamper",
       "includes": [
-        "Personalized item",
-        "Sweet treats",
-        "Gift packaging"
+        "One customized mug",
+        "One chocolate bar",
+        "A selection of sweet treats (two or three)",
+        "A handwritten birthday card",
+        "Elegant gift packaging",
+        "Cake (as from 1kg) optional"
       ]
     },
     {
       "id": "celebration",
-      "name": "Celebration",
+      "name": "The It Girl / It Guy",
       "price": 3000,
-      "description": "A generous combination for milestones worth celebrating.",
+      "description": "For the stylish person who loves carrying something that feels uniquely theirs.",
       "includes": [
-        "Customized gift",
-        "Sweet treats",
-        "Chocolate bar",
-        "Elegant packaging"
+        "A customized thermo bottle",
+        "One chocolate bar",
+        "Sweet treats (maximum of six)",
+        "A personalized birthday card",
+        "Premium gift packaging",
+        "Cake (as from 1 kg) optional"
       ]
     },
     {
       "id": "signature",
-      "name": "Signature Gift",
-      "price": 5000,
-      "description": "A complete gifting experience, thoughtfully assembled.",
+      "name": "The Birthday Reset",
+      "price": 4000,
+      "description": "For the person who deserves to slow down, feel appreciated and enjoy a little self-care",
       "includes": [
-        "Premium personalized item",
-        "Selected treats",
-        "Chocolate",
-        "Scented candle",
-        "Elegant packaging"
+        "A customized cup/mug & thermo bottle/ water bottle",
+        "One scented candle",
+        "One satin scrunchie or sleep mask",
+        "One sheet face mask or another self-care item",
+        "A chocolate bar and sweet treats",
+        "A birthday affirmation card",
+        "Coordinated gift packaging",
+        "Cake (as from 1 kg) optional"
       ]
     }
   ]
