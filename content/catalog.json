@@ -312,6 +312,53 @@
         "Premium chocolates/ snacks of choice",
         "Premium luxury packaging"
       ]
+    },
+    {
+      "id": "package-8bb4d515-465f-4e90-ac48-030d40a540c6",
+      "name": "The Comfort Hug",
+      "price": 2000,
+      "description": "A little comfort for your not-so-comfortable days.",
+      "includes": [
+        "Customized mug/ cup",
+        "Chocolate bar & her favorite sweet treats",
+        "Sanitary pads in her preferred type & wipes",
+        "A thoughtful affirmation card",
+        "Soft, pretty packaging"
+      ]
+    },
+    {
+      "id": "package-0e21c682-ebf0-45fd-aea3-1b099a38ee21",
+      "name": "The Soft Landing",
+      "price": 3500,
+      "description": "Permission to slow down and take care of you",
+      "includes": [
+        "Customized mug",
+        "A heating pad",
+        "Sanitary pads in her preferred type & wipes",
+        "Cozy socks/ satin crunch",
+        "Chocolate and sweet treats",
+        "Herbal tea",
+        "Face masks",
+        "Luxury packaging"
+      ]
+    },
+    {
+      "id": "package-1119e4f7-fde9-412a-bd16-a2df06fbc5c8",
+      "name": "The Queen's Retreat",
+      "price": 4972,
+      "description": "Even queens deserve to put their crowns down",
+      "includes": [
+        "Customized stanley cup",
+        "A customized pocket mirror or keepsake",
+        "A quality satin sleep mask",
+        "Scented candle",
+        "Body lotion/ body-care treat",
+        "Sanitary pads or preferred period products & wipes",
+        "Heating pad",
+        "Premium chocolate selection",
+        "A heartfelt self-care card",
+        "Luxury packaging"
+      ]
     }
   ]
 }
