@@ -359,6 +359,136 @@
         "A heartfelt self-care card",
         "Luxury packaging"
       ]
+    },
+    {
+      "id": "package-b5e9c88a-a5f9-4598-aa7d-426679d79604",
+      "name": "Anniversary Collection",
+      "price": 3000,
+      "description": "Still Choosing You\nOf all the people in the world, I'd still choose you.",
+      "includes": [
+        "Two customized mugs",
+        "A couple card game of choice",
+        "Sweet treats",
+        "A handwritten love letter or message card",
+        "Romantic gift packaging"
+      ]
+    },
+    {
+      "id": "package-436ee7dc-cc8e-44e2-a9ac-3e9a01626558",
+      "name": "Our Kind of Forever",
+      "price": 5000,
+      "description": "A thousand memories, and still my favourite person.",
+      "includes": [
+        "Two customized wine glasses",
+        "Two customized cups",
+        "One scented candle",
+        "A framed photograph of the couple",
+        "Selection of sweet treats",
+        "A personalized anniversary card",
+        "Elegant presentation box"
+      ]
+    },
+    {
+      "id": "package-4f760a07-f87a-48b4-af91-9f842efd730e",
+      "name": "The Forever Affair",
+      "price": 9000,
+      "description": "Not just another year. Another chapter of us.",
+      "includes": [
+        "Two premium personalized drinkware items",
+        "A mini bouquet",
+        "A small photo album or memory book",
+        "A fragrance gift for one/both partners",
+        "Selection of sweet treats",
+        "A sealed “Open on our anniversary” letter",
+        "Luxury gift packaging"
+      ]
+    },
+    {
+      "id": "package-a38b5fa1-0473-48c1-ada0-85e0bc4298ff",
+      "name": "Wedding packages",
+      "price": 3000,
+      "description": "The Sweet Beginning\nHere's to the first page of forever",
+      "includes": [
+        "Two personalized couple mugs",
+        "A small framed photo",
+        "A newlywed wishes card",
+        "Sweet treats",
+        "Luxury packaging"
+      ]
+    },
+    {
+      "id": "package-713246f3-fc25-41fa-9d07-5cf47268e5fb",
+      "name": "The Two of Us",
+      "price": 5500,
+      "description": "Two hearts, one home, a lifetime of memories.",
+      "includes": [
+        "Two personalized wine glasses",
+        "A couple's photo frame",
+        "A set of drinkware/ plates",
+        "A personalized wedding wishes card",
+        "Premium gift packaging"
+      ]
+    },
+    {
+      "id": "package-ec18c5fb-1eba-4d71-b882-f39ac7a9fe1b",
+      "name": "The Ever After Experience",
+      "price": 12000,
+      "description": "A beautiful beginning deserves a beautiful gift",
+      "includes": [
+        "A premium pair of personalized Stanley cups",
+        "A quality pair of bath robes",
+        "A gifting set of plates & cutlery",
+        "A set of cups/ mugs",
+        "A framed photo of the couple",
+        "A personalized message for the couple",
+        "Luxury wedding presentation box"
+      ]
+    },
+    {
+      "id": "package-55c6fd8e-107a-4657-abc7-c11137957dce",
+      "name": "Baby Shower selection",
+      "price": 2800,
+      "description": "Tiny Blessing\nLittle feet, endless blessings",
+      "includes": [
+        "A customized cup",
+        "Two or three pairs of baby socks",
+        "One soft baby bib",
+        "A small plush toy",
+        "A baby shower wishes card",
+        "Neutral gift packaging"
+      ]
+    },
+    {
+      "id": "package-d48e3bad-1587-423f-b49a-0c7837f1cced",
+      "name": "Little Miracle",
+      "price": 5000,
+      "description": "A little miracle, a lifetime of love",
+      "includes": [
+        "A customized mug",
+        "One soft baby blanket",
+        "One baby outfit",
+        "One cuddly teddy bear",
+        "A personalized name card, if the name is known",
+        "A baby shower greeting card",
+        "Premium gift packaging"
+      ]
+    },
+    {
+      "id": "package-15b33d4b-f99b-494a-8de2-86f11e408533",
+      "name": "Welcome to the World",
+      "price": 8500,
+      "description": "The smallest arrival can fill the biggest space in our hearts.",
+      "includes": [
+        "A customized Stanley cup for the mom",
+        "A fleece blanket",
+        "One or two baby outfits",
+        "A hooded baby towel",
+        "Baby socks and bibs",
+        "Toys for the baby",
+        "A bouquet of flowers",
+        "A personalized welcome card",
+        "Luxury gift packaging"
+      ]
     }
   ]
 }
