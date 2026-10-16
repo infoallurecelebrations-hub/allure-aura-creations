@@ -489,6 +489,49 @@
         "A personalized welcome card",
         "Luxury gift packaging"
       ]
+    },
+    {
+      "id": "package-4990f248-f711-486f-bd76-e58ea5af8e85",
+      "name": "The Love Affair",
+      "price": 9500,
+      "description": "Not just a gift. A whole love story in a box.",
+      "includes": [
+        "One customized Stanley cup",
+        "One quality perfume/body mist",
+        "A bouquet of roses/ customized wallet & belt",
+        "A teddy bear/ a wrist watch",
+        "Premium chocolates",
+        "A scented candle",
+        "A set of romantic message cards or a sealed love letter",
+        "Luxury gift packaging"
+      ]
+    },
+    {
+      "id": "package-ad3548cb-1c4d-4cb3-8984-9a622458308c",
+      "name": "Valentines Day collection",
+      "price": 2500,
+      "description": "A little something to remind you that you're loved",
+      "includes": [
+        "One customized mug",
+        "A chocolate bar",
+        "Sweet treats",
+        "A handwritten love note",
+        "Romantic gift packaging"
+      ]
+    },
+    {
+      "id": "package-be63865a-1f0b-49ef-a0c4-492c4fe96104",
+      "name": "Love in Full Bloom",
+      "price": 4500,
+      "description": "You make ordinary days feel extraordinary",
+      "includes": [
+        "One customized thermo bottle/ two pairs of wine glasses",
+        "A mini bouquet of roses/ customized wallet & belt",
+        "A scented candle",
+        "Premium chocolates",
+        "A personalized romantic card",
+        "Gift packaging"
+      ]
     }
   ]
 }
