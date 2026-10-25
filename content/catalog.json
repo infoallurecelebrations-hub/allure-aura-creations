@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "categories": [
     "Accessories",
     "Mugs & Cups",
@@ -14,7 +14,9 @@
       "price": 3500,
       "description": "Add a product description.",
       "featured": false,
-      "image": "/uploads/products/product-9caba3df-ead5-4a52-9a66-c4c105801503-e4b163c2-ec21-45a1-900a-0939c9a60d3c.webp"
+      "images": [
+        "/uploads/products/product-9caba3df-ead5-4a52-9a66-c4c105801503-e4b163c2-ec21-45a1-900a-0939c9a60d3c.webp"
+      ]
     },
     {
       "id": "product-832873ed-b804-479e-8617-6e004f7f729d",
@@ -23,7 +25,9 @@
       "price": 800,
       "description": "Add a product description.",
       "featured": false,
-      "image": "/uploads/products/product-832873ed-b804-479e-8617-6e004f7f729d-cc76f559-5642-45ea-a2e6-ad34fcb72ced.webp"
+      "images": [
+        "/uploads/products/product-832873ed-b804-479e-8617-6e004f7f729d-cc76f559-5642-45ea-a2e6-ad34fcb72ced.webp"
+      ]
     },
     {
       "id": "mug",
@@ -32,7 +36,9 @@
       "price": 1100,
       "description": "Personalized with a name or short message. Detailed designs are quoted separately.",
       "featured": true,
-      "image": "/uploads/products/mug-8c48f941-8281-406a-8d09-d784dbe7e097.webp"
+      "images": [
+        "/uploads/products/mug-8c48f941-8281-406a-8d09-d784dbe7e097.webp"
+      ]
     },
     {
       "id": "ceramic",
@@ -41,7 +47,9 @@
       "price": 800,
       "description": "A thoughtful everyday cup finished with your chosen name or words.",
       "featured": true,
-      "image": "/uploads/products/ceramic-8a85bbbf-f9cc-4ac2-96a4-16f561692f66.webp"
+      "images": [
+        "/uploads/products/ceramic-8a85bbbf-f9cc-4ac2-96a4-16f561692f66.webp"
+      ]
     },
     {
       "id": "wine",
@@ -50,7 +58,9 @@
       "price": 600,
       "description": "Name or short-text rhinestone customization, priced per glass.",
       "featured": true,
-      "image": "/uploads/products/wine-7d4166d4-1777-4269-9f1c-60325e7dea73.webp"
+      "images": [
+        "/uploads/products/wine-7d4166d4-1777-4269-9f1c-60325e7dea73.webp"
+      ]
     },
     {
       "id": "stanley",
@@ -59,7 +69,9 @@
       "price": 2700,
       "description": "A personalized tumbler; final pricing depends on the item and design.",
       "featured": true,
-      "image": "/uploads/products/stanley-a3531370-ef2a-4d73-bddb-706e9004e95b.webp"
+      "images": [
+        "/uploads/products/stanley-a3531370-ef2a-4d73-bddb-706e9004e95b.webp"
+      ]
     },
     {
       "id": "thermo",
@@ -68,7 +80,9 @@
       "price": 1800,
       "description": "Add a name, initials or a short phrase to an everyday favourite.",
       "featured": true,
-      "image": "/uploads/products/thermo-8e67f907-cd32-4868-82fd-977b7e1242ae.webp"
+      "images": [
+        "/uploads/products/thermo-8e67f907-cd32-4868-82fd-977b7e1242ae.webp"
+      ]
     },
     {
       "id": "sports",
@@ -77,7 +91,9 @@
       "price": 1300,
       "description": "A personal touch for the bottle that goes everywhere with you.",
       "featured": false,
-      "image": "/uploads/products/sports-61cc22eb-55f0-4de1-bfc4-54ec8d0a548f.webp"
+      "images": [
+        "/uploads/products/sports-61cc22eb-55f0-4de1-bfc4-54ec8d0a548f.webp"
+      ]
     },
     {
       "id": "mirror",
@@ -86,7 +102,9 @@
       "price": 600,
       "description": "A personalized compact mirror, with options based on your design.",
       "featured": false,
-      "image": "/uploads/products/mirror-9996e3ab-e299-479f-96ec-e27c3b5ce12e.webp"
+      "images": [
+        "/uploads/products/mirror-9996e3ab-e299-479f-96ec-e27c3b5ce12e.webp"
+      ]
     },
     {
       "id": "notebook",
@@ -95,7 +113,9 @@
       "price": 1500,
       "description": "A refined notebook with a name or a simple rhinestone design.",
       "featured": false,
-      "image": "/uploads/products/notebook-8b58952d-ecc6-4e23-8814-bf4f134e7dde.webp"
+      "images": [
+        "/uploads/products/notebook-8b58952d-ecc6-4e23-8814-bf4f134e7dde.webp"
+      ]
     },
     {
       "id": "phone",
@@ -104,7 +124,9 @@
       "price": 800,
       "description": "Tell us your phone model and design idea so we can prepare a quote.",
       "featured": false,
-      "image": "/uploads/products/phone-0a115e22-103a-4e30-a678-e7ec58823d2b.webp"
+      "images": [
+        "/uploads/products/phone-0a115e22-103a-4e30-a678-e7ec58823d2b.webp"
+      ]
     },
     {
       "id": "laptop",
@@ -113,7 +135,9 @@
       "price": 300,
       "description": "Customization for a laptop lid, priced according to the design.",
       "featured": false,
-      "image": "/uploads/products/laptop-70d40838-6f98-4b1f-aa09-c75bfb3098eb.webp"
+      "images": [
+        "/uploads/products/laptop-70d40838-6f98-4b1f-aa09-c75bfb3098eb.webp"
+      ]
     },
     {
       "id": "mini-fan",
@@ -122,7 +146,9 @@
       "price": 800,
       "description": "A playful personalized accessory; model availability is confirmed first.",
       "featured": false,
-      "image": "/uploads/products/mini-fan-2e51d294-8376-4056-8be5-85a2dce8d72a.webp"
+      "images": [
+        "/uploads/products/mini-fan-2e51d294-8376-4056-8be5-85a2dce8d72a.webp"
+      ]
     },
     {
       "id": "earpods",
@@ -131,7 +157,9 @@
       "price": 1500,
       "description": "Personalized case customization for your specific model.",
       "featured": false,
-      "image": "/uploads/products/earpods-f3d0c516-970d-4522-ab78-8d49827f2cae.webp"
+      "images": [
+        "/uploads/products/earpods-f3d0c516-970d-4522-ab78-8d49827f2cae.webp"
+      ]
     },
     {
       "id": "headphones",
@@ -140,7 +168,9 @@
       "price": 2500,
       "description": "Customization quoted according to the headphone model and design.",
       "featured": false,
-      "image": "/uploads/products/headphones-3c318904-8bde-4e88-b879-a7a6ec649906.webp"
+      "images": [
+        "/uploads/products/headphones-3c318904-8bde-4e88-b879-a7a6ec649906.webp"
+      ]
     },
     {
       "id": "own-item",
@@ -149,7 +179,9 @@
       "price": 700,
       "description": "Share a photo and details first so we can confirm the item is suitable.",
       "featured": true,
-      "image": "/uploads/products/own-item-3ca62f8e-27ed-4678-944a-15032ab292b7.webp"
+      "images": [
+        "/uploads/products/own-item-3ca62f8e-27ed-4678-944a-15032ab292b7.webp"
+      ]
     }
   ],
   "packages": [

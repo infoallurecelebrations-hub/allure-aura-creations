@@ -55,7 +55,13 @@ test("publish commits JSON and image deletions then fast-forwards the correct Gi
     calls.push({ url, method: init.method || "GET", body });
     if (url.includes("/git/ref/")) return Response.json({ object: { sha: revision } });
     if (url.endsWith(`/git/commits/${revision}`)) return Response.json({ tree: { sha: "tree" } });
-    if (url.includes("?recursive=1")) return Response.json({ truncated: false, tree: [{ path: "public/uploads/products/old.webp", type: "blob" }] });
+    if (url.includes("?recursive=1")) return Response.json({
+      truncated: false,
+      tree: [
+        { path: "public/uploads/products/old.webp", type: "blob" },
+        ...content.catalog.products.flatMap((product) => product.images.map((image) => ({ path: `public${image}`, type: "blob" }))),
+      ],
+    });
     return Response.json({ sha: "b".repeat(40), html_url: "https://example.com/commit" });
   });
   await server.publishAdminContent(revision, content, [], ["public/uploads/products/old.webp"]);
@@ -80,7 +86,10 @@ test("stale editors cannot create any blobs or commits", async () => {
 test("invalid prices, image bytes, unsafe paths and referenced deletions are rejected", () => {
   const { validatePublishRequest } = loadServer("admin-validation");
   const payload = { baseSha: revision, content: structuredClone(content), images: [], deletions: [] };
-  assert.equal(plain(validatePublishRequest(payload)).content.catalog.products.length, 14);
+  assert.equal(plain(validatePublishRequest(payload)).content.catalog.products.length, 16);
+  const oversizedGallery = structuredClone(payload);
+  oversizedGallery.content.catalog.products[0].images = Array.from({ length: 11 }, (_, index) => `/uploads/products/test-${index}.webp`);
+  assert.throws(() => validatePublishRequest(oversizedGallery), /too many/);
   payload.content.catalog.products[0].price = -1;
   assert.throws(() => validatePublishRequest(payload), /price/);
   payload.content.catalog.products[0].price = 1100;
@@ -90,6 +99,6 @@ test("invalid prices, image bytes, unsafe paths and referenced deletions are rej
   payload.deletions = ["content/catalog.json"];
   assert.throws(() => validatePublishRequest(payload), /path/);
   payload.deletions = ["public/uploads/products/test.webp"];
-  payload.content.catalog.products[0].image = "/uploads/products/test.webp";
+  payload.content.catalog.products[0].images.push("/uploads/products/test.webp");
   assert.throws(() => validatePublishRequest(payload), /still references/);
 });

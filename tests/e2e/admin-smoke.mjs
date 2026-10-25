@@ -88,10 +88,13 @@ try {
   await page.screenshot({ path: "test-results/admin/draft-390.png" });
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await card.locator('input[type="file"]').setInputFiles("public/brand/logo.png");
-  await card.getByRole("button", { name: "Remove image" }).waitFor();
+  await card.getByLabel("Add photos for QA product").setInputFiles(["public/brand/logo.png", "public/brand/emblem.png"]);
+  await card.getByRole("button", { name: "Remove", exact: true }).waitFor();
   await page.waitForFunction(() => !document.querySelector(".admin-workspace-fields").disabled);
-  assert.ok(await card.locator("img").evaluate((img) => img.complete && img.naturalWidth > 0));
+  assert.equal(await card.locator(".admin-product-gallery__thumbs button").count(), 2);
+  await card.getByRole("button", { name: "Select photo 2 of QA product" }).click();
+  await card.getByRole("button", { name: "Make cover" }).click();
+  assert.ok(await card.locator("img").first().evaluate((img) => img.complete && img.naturalWidth > 0));
   let received;
   let mode = "conflict";
   let finishPublish;
@@ -105,8 +108,9 @@ try {
   await page.getByRole("button", { name: "Publish changes" }).click();
   await page.getByRole("alert").filter({ hasText: "repository changed" }).waitFor();
   assert.equal(received.content.catalog.products[0].name, "QA product");
-  assert.equal(received.images.length, 1);
+  assert.equal(received.images.length, 2);
   assert.ok(received.images[0].path.endsWith(".webp"));
+  assert.equal(received.content.catalog.products[0].images.length, 2);
   assert.equal(await card.getByLabel("Price (KSh)", { exact: true }).inputValue(), "1900");
   mode = "expired";
   await page.getByRole("button", { name: "Publish changes" }).click();
@@ -119,16 +123,16 @@ try {
   while (!finishPublish) await new Promise((resolve) => setTimeout(resolve, 20));
   finishPublish();
   await page.getByRole("status").filter({ hasText: "Published to GitHub" }).waitFor();
-  assert.ok(await card.locator("img").evaluate((img) => img.complete && img.naturalWidth > 0));
-  await card.getByRole("button", { name: "Remove image" }).click();
+  assert.ok(await card.locator("img").first().evaluate((img) => img.complete && img.naturalWidth > 0));
+  await card.getByRole("button", { name: "Remove", exact: true }).click();
   mode = "conflict";
   await page.getByRole("button", { name: "Publish changes" }).click();
   await page.getByRole("alert").filter({ hasText: "repository changed" }).waitFor();
   assert.equal(received.deletions.length, 1);
   await card.getByRole("button", { name: "Delete product" }).click();
-  assert.equal(await page.locator(".admin-product-editor").count(), 14);
+  assert.equal(await page.locator(".admin-product-editor").count(), content.catalog.products.length);
   await page.getByRole("button", { name: "Discard changes" }).click();
-  reports.push("Products: search, edit, discard, create, image conversion/preview/removal, delete, publish locking, conflict and session-expiry recovery");
+  reports.push("Products: search, edit, discard, create, multi-photo conversion/order/preview/removal, delete, publish locking, conflict and session-expiry recovery");
   for (const [section, add, remove] of [["Packages", "+ Add package", "Delete package"], ["Journal", "+ Add story", "Delete story"], ["Reviews", "+ Add review", "Delete review"]]) {
     await visit(section);
     const count = await page.locator(".admin-editor-list > article").count();

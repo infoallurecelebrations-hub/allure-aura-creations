@@ -28,6 +28,14 @@ function price(value: unknown, label: string) {
   return value;
 }
 
+function imagePath(value: unknown, label: string) {
+  const path = text(value, label, 240);
+  if (!/^\/uploads\/products\/[a-z0-9][a-z0-9-]*\.(webp|png|jpe?g)$/.test(path)) {
+    throw new ValidationError(`${label} has an invalid path.`);
+  }
+  return path;
+}
+
 function list(value: unknown, label: string, maximum: number) {
   if (!Array.isArray(value)) throw new ValidationError(`${label} must be a list.`);
   if (value.length > maximum) throw new ValidationError(`${label} has too many entries.`);
@@ -50,10 +58,9 @@ function validateContent(value: unknown): AdminContent {
   const categories = list(catalog.categories, "Categories", 30).map((item, index) => text(item, `Category ${index + 1}`, 80));
   const products = list(catalog.products, "Products", 200).map((item, index) => {
     const product = object(item, `Product ${index + 1}`);
-    const image = text(product.image ?? "", `Product ${index + 1} image`, 240, false);
-    if (image && !/^\/uploads\/products\/[a-z0-9][a-z0-9-]*\.(webp|png|jpe?g)$/.test(image)) {
-      throw new ValidationError(`Product ${index + 1} has an invalid image path.`);
-    }
+    const images = list(product.images ?? [], `Product ${index + 1} images`, 10)
+      .map((image, imageIndex) => imagePath(image, `Product ${index + 1} image ${imageIndex + 1}`));
+    if (new Set(images).size !== images.length) throw new ValidationError(`Product ${index + 1} has duplicate images.`);
     return {
       id: identifier(product.id, `Product ${index + 1} ID`),
       name: text(product.name, `Product ${index + 1} name`, 120),
@@ -61,7 +68,7 @@ function validateContent(value: unknown): AdminContent {
       price: price(product.price, `Product ${index + 1} price`),
       description: text(product.description, `Product ${index + 1} description`, 500),
       featured: Boolean(product.featured),
-      image,
+      images,
     };
   });
   uniqueIds(products, "Products");
@@ -121,7 +128,7 @@ function validateContent(value: unknown): AdminContent {
   if (!/^\d{8,15}$/.test(whatsapp)) throw new ValidationError("WhatsApp number must contain 8 to 15 digits.");
 
   const content: AdminContent = {
-    catalog: { schemaVersion: 1, categories, products, packages },
+    catalog: { schemaVersion: 2, categories, products, packages },
     journal: { schemaVersion: 1, posts },
     reviews: { schemaVersion: 1, reviews },
     site: {
@@ -147,14 +154,14 @@ function validateContent(value: unknown): AdminContent {
 }
 
 function validateImages(value: unknown): PendingImage[] {
-  const images = list(value, "Images", 4).map((item, index) => {
+  const images = list(value, "Images", 10).map((item, index) => {
     const image = object(item, `Image ${index + 1}`);
     const path = text(image.path, `Image ${index + 1} path`, 200);
-    const contentBase64 = text(image.contentBase64, `Image ${index + 1} data`, 1_400_000);
+    const contentBase64 = text(image.contentBase64, `Image ${index + 1} data`, 400_000);
     if (!/^public\/uploads\/products\/[a-z0-9][a-z0-9-]*\.webp$/.test(path)) throw new ValidationError(`Image ${index + 1} path is invalid.`);
     if (!/^[A-Za-z0-9+/]+={0,2}$/.test(contentBase64)) throw new ValidationError(`Image ${index + 1} data is invalid.`);
     const imageBuffer = Buffer.from(contentBase64, "base64");
-    if (imageBuffer.byteLength > 650_000) throw new ValidationError(`Image ${index + 1} is larger than 650 KB.`);
+    if (imageBuffer.byteLength > 280_000) throw new ValidationError(`Image ${index + 1} is larger than 280 KB.`);
     if (imageBuffer.byteLength < 12 || imageBuffer.toString("ascii", 0, 4) !== "RIFF" || imageBuffer.toString("ascii", 8, 12) !== "WEBP") {
       throw new ValidationError(`Image ${index + 1} is not a valid WebP image.`);
     }
@@ -186,7 +193,7 @@ export function validatePublishRequest(value: unknown): PublishRequest {
   if (deletions.some((path) => uploadedPaths.has(path))) {
     throw new ValidationError("An image cannot be uploaded and deleted in the same publish.");
   }
-  const referencedImages = new Set(content.catalog.products.flatMap((product) => product.image ? [`public${product.image}`] : []));
+  const referencedImages = new Set(content.catalog.products.flatMap((product) => product.images.map((image) => `public${image}`)));
   if (deletions.some((path) => referencedImages.has(path))) {
     throw new ValidationError("A product still references an image marked for deletion.");
   }

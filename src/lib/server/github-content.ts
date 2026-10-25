@@ -119,7 +119,7 @@ export async function publishAdminContent(baseSha: string, content: AdminContent
   const existingFiles = new Set(currentTree.tree.filter((entry) => entry.type === "blob").map((entry) => entry.path));
   const uploadedFiles = new Set(images.map((image) => image.path));
   const missingImage = content.catalog.products
-    .map((product) => product.image ? `public${product.image}` : "")
+    .flatMap((product) => product.images.map((image) => `public${image}`))
     .find((path) => path && !existingFiles.has(path) && !uploadedFiles.has(path));
   if (missingImage) throw new GithubContentError("A product image is missing. Upload it again before publishing.", 400);
   const effectiveDeletions = deletions.filter((path) => existingFiles.has(path));

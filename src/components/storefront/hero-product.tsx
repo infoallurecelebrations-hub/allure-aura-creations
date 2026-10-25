@@ -5,11 +5,12 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { ArrowUpRight } from "@/components/ui/icons";
-import { formatPrice, type Product } from "@/lib/content";
+import { formatPrice, productImages, type Product } from "@/lib/content";
 
 export function HeroProduct({ product }: { product?: Product }) {
   const [failedImage, setFailedImage] = useState("");
-  const showPhoto = Boolean(product?.image && product.image !== failedImage);
+  const image = product ? productImages(product)[0] : "";
+  const showPhoto = Boolean(image && image !== failedImage);
   const href = showPhoto && product
     ? `/customize?${new URLSearchParams({ product: product.id })}`
     : "/studio";
@@ -18,7 +19,7 @@ export function HeroProduct({ product }: { product?: Product }) {
     <figure className="hero-piece">
       <div className="hero-piece__visual">
         {showPhoto && product ? (
-          <Image alt={product.name} className="hero-piece__photo" fill loading="eager" fetchPriority="high" onError={() => setFailedImage(product.image)} sizes="(max-width: 820px) 92vw, 46vw" src={product.image} />
+          <Image alt={product.name} className="hero-piece__photo" fill loading="eager" fetchPriority="high" onError={() => setFailedImage(image)} sizes="(max-width: 820px) 92vw, 46vw" src={image} />
         ) : (
           <>
             <span className="hero-piece__label">Personalization example</span>

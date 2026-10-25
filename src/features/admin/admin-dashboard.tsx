@@ -3,10 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { type ChangeEvent, type ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 
 import { ArrowUpRight, Check, Gift, Package, Sparkle } from "@/components/ui/icons";
 
+import { ProductGalleryEditor } from "./product-gallery-editor";
 import type { AdminContent, AdminContentResponse, PendingImage } from "./types";
 
 type Tab = "overview" | "products" | "packages" | "journal" | "reviews" | "settings";
@@ -19,6 +20,10 @@ const tabs: { id: Tab; label: string }[] = [
   { id: "reviews", label: "Reviews" },
   { id: "settings", label: "Site settings" },
 ];
+
+const MAX_PRODUCT_IMAGES = 10;
+const MAX_PENDING_IMAGES = 10;
+const MAX_OPTIMIZED_IMAGE_BYTES = 280_000;
 
 function slug(value: string) {
   return value.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60) || "item";
@@ -37,26 +42,35 @@ async function optimizeImage(file: File) {
   if (file.size > 12_000_000) throw new Error("The original image must be smaller than 12 MB.");
 
   const bitmap = await createImageBitmap(file);
-  const maximum = 1400;
-  const scale = Math.min(1, maximum / Math.max(bitmap.width, bitmap.height));
-  const canvas = document.createElement("canvas");
-  canvas.width = Math.max(1, Math.round(bitmap.width * scale));
-  canvas.height = Math.max(1, Math.round(bitmap.height * scale));
-  const context = canvas.getContext("2d");
-  if (!context) throw new Error("This browser cannot prepare the image.");
-  context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-  bitmap.close();
+  try {
+    const dimensions = [1600, 1400, 1200, 1050, 900];
+    const qualities = [0.82, 0.72, 0.64];
+    for (const maximum of dimensions) {
+      const scale = Math.min(1, maximum / Math.max(bitmap.width, bitmap.height));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+      canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+      const context = canvas.getContext("2d");
+      if (!context) throw new Error("This browser cannot prepare the image.");
+      context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
 
-  const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/webp", 0.78));
-  if (!blob) throw new Error("Image conversion failed.");
-  if (blob.size > 650_000) throw new Error("The optimized image is still larger than 650 KB. Choose a smaller image.");
-  const buffer = await blob.arrayBuffer();
-  let binary = "";
-  const bytes = new Uint8Array(buffer);
-  for (let index = 0; index < bytes.length; index += 0x8000) {
-    binary += String.fromCharCode(...bytes.subarray(index, index + 0x8000));
+      for (const quality of qualities) {
+        const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/webp", quality));
+        if (!blob) throw new Error("Image conversion failed.");
+        if (blob.size > MAX_OPTIMIZED_IMAGE_BYTES) continue;
+        const buffer = await blob.arrayBuffer();
+        let binary = "";
+        const bytes = new Uint8Array(buffer);
+        for (let index = 0; index < bytes.length; index += 0x8000) {
+          binary += String.fromCharCode(...bytes.subarray(index, index + 0x8000));
+        }
+        return btoa(binary);
+      }
+    }
+    throw new Error("This photo could not be reduced below 280 KB. Choose a less detailed or smaller image.");
+  } finally {
+    bitmap.close();
   }
-  return btoa(binary);
 }
 
 function EditorHeading({ eyebrow, title, description, action }: { eyebrow: string; title: string; description: string; action?: ReactNode }) {
@@ -191,33 +205,38 @@ export function AdminDashboard() {
     }
   }
 
-  async function uploadProductImage(event: ChangeEvent<HTMLInputElement>, productId: string) {
-    const file = event.target.files?.[0];
-    event.target.value = "";
-    if (!file || !document || busy.current) return;
+  async function uploadProductImages(files: File[], productId: string) {
+    if (!files.length || !document || busy.current) return;
+    const product = document.content.catalog.products.find((entry) => entry.id === productId);
+    if (!product) return;
     busy.current = true;
     setUploading(true);
     setNotice(null);
     try {
-      const contentBase64 = await optimizeImage(file);
-      const fileName = `${slug(productId)}-${crypto.randomUUID()}.webp`;
-      const path = `public/uploads/products/${fileName}`;
-      const currentImage = document.content.catalog.products.find((entry) => entry.id === productId)?.image || "";
-      const currentRepositoryPath = currentImage ? `public${currentImage}` : "";
-      const currentWasPending = pendingImages.some((image) => image.path === currentRepositoryPath);
-      const remaining = pendingImages.filter((image) => image.path !== currentRepositoryPath);
-      if (remaining.length >= 4) throw new Error("Publish the current images before adding more.");
-      setPendingImages([...remaining, { path, contentBase64 }]);
-      setPendingDeletions((paths) => {
-        const next = paths.filter((entry) => entry !== path);
-        return currentImage && !currentWasPending && !next.includes(currentRepositoryPath) ? [...next, currentRepositoryPath] : next;
-      });
+      if (product.images.length + files.length > MAX_PRODUCT_IMAGES) {
+        throw new Error(`This product can have up to ${MAX_PRODUCT_IMAGES} photos. Choose ${MAX_PRODUCT_IMAGES - product.images.length} or fewer.`);
+      }
+      if (pendingImages.length + files.length > MAX_PENDING_IMAGES) {
+        throw new Error(`Publish the ${pendingImages.length} prepared photo${pendingImages.length === 1 ? "" : "s"} before adding more.`);
+      }
+
+      const prepared: PendingImage[] = [];
+      const storefrontPaths: string[] = [];
+      for (const file of files) {
+        const contentBase64 = await optimizeImage(file);
+        const fileName = `${slug(productId)}-${crypto.randomUUID()}.webp`;
+        prepared.push({ path: `public/uploads/products/${fileName}`, contentBase64 });
+        storefrontPaths.push(`/uploads/products/${fileName}`);
+      }
+
+      setPendingImages([...pendingImages, ...prepared]);
+      setPendingDeletions((paths) => paths.filter((path) => !prepared.some((image) => image.path === path)));
       edit((content) => {
-        const product = content.catalog.products.find((entry) => entry.id === productId);
-        if (product) product.image = `/uploads/products/${fileName}`;
+        const entry = content.catalog.products.find((item) => item.id === productId);
+        if (entry) entry.images.push(...storefrontPaths);
       });
     } catch (caught) {
-      setNotice({ tone: "error", text: caught instanceof Error ? caught.message : "Unable to prepare image." });
+      setNotice({ tone: "error", text: caught instanceof Error ? caught.message : "Unable to prepare photos." });
       window.scrollTo({ top: 0, behavior: "smooth" });
     } finally {
       busy.current = false;
@@ -225,28 +244,45 @@ export function AdminDashboard() {
     }
   }
 
-  function removeProductImage(productId: string) {
+  function removeProductImage(productId: string, imagePath: string) {
     const product = document?.content.catalog.products.find((entry) => entry.id === productId);
-    if (!product?.image) return;
-    const repositoryPath = `public${product.image}`;
+    if (!product?.images.includes(imagePath)) return;
+    const repositoryPath = `public${imagePath}`;
     const wasPending = pendingImages.some((image) => image.path === repositoryPath);
     setPendingImages((images) => images.filter((image) => image.path !== repositoryPath));
     if (!wasPending) setPendingDeletions((paths) => paths.includes(repositoryPath) ? paths : [...paths, repositoryPath]);
     edit((content) => {
       const entry = content.catalog.products.find((item) => item.id === productId);
-      if (entry) entry.image = "";
+      if (entry) entry.images = entry.images.filter((path) => path !== imagePath);
+    });
+  }
+
+  function moveProductImage(productId: string, imagePath: string, direction: -1 | 1) {
+    edit((content) => {
+      const product = content.catalog.products.find((entry) => entry.id === productId);
+      if (!product) return;
+      const currentIndex = product.images.indexOf(imagePath);
+      const nextIndex = currentIndex + direction;
+      if (currentIndex < 0 || nextIndex < 0 || nextIndex >= product.images.length) return;
+      [product.images[currentIndex], product.images[nextIndex]] = [product.images[nextIndex], product.images[currentIndex]];
+    });
+  }
+
+  function makeProductCover(productId: string, imagePath: string) {
+    edit((content) => {
+      const product = content.catalog.products.find((entry) => entry.id === productId);
+      if (!product) return;
+      product.images = [imagePath, ...product.images.filter((path) => path !== imagePath)];
     });
   }
 
   function deleteProduct(productId: string) {
     const product = document?.content.catalog.products.find((entry) => entry.id === productId);
     if (!product || !window.confirm(`Remove ${product.name}?`)) return;
-    if (product.image) {
-      const repositoryPath = `public${product.image}`;
-      const wasPending = pendingImages.some((image) => image.path === repositoryPath);
-      setPendingImages((images) => images.filter((image) => image.path !== repositoryPath));
-      if (!wasPending) setPendingDeletions((paths) => paths.includes(repositoryPath) ? paths : [...paths, repositoryPath]);
-    }
+    const repositoryPaths = product.images.map((image) => `public${image}`);
+    const pendingPaths = new Set(pendingImages.map((image) => image.path));
+    setPendingImages((images) => images.filter((image) => !repositoryPaths.includes(image.path)));
+    setPendingDeletions((paths) => [...new Set([...paths, ...repositoryPaths.filter((path) => !pendingPaths.has(path))])]);
     edit((content) => {
       const index = content.catalog.products.findIndex((entry) => entry.id === productId);
       if (index >= 0) content.catalog.products.splice(index, 1);
@@ -293,16 +329,16 @@ export function AdminDashboard() {
               </section> : null}
 
               {activeTab === "products" ? <section>
-                <EditorHeading action={<button className="admin-add-button" onClick={() => { setSearch(""); edit((content) => content.catalog.products.unshift({ id: uniqueId("product"), name: "New product", category: content.catalog.categories[0] || "Accessories", price: 0, description: "Add a product description.", featured: false, image: "" })); }} type="button">+ Add product</button>} description="Edit prices, descriptions, categories, featured items and product imagery." eyebrow="Catalogue" title="Products" />
+                <EditorHeading action={<button className="admin-add-button" onClick={() => { setSearch(""); edit((content) => content.catalog.products.unshift({ id: uniqueId("product"), name: "New product", category: content.catalog.categories[0] || "Accessories", price: 0, description: "Add a product description.", featured: false, images: [] })); }} type="button">+ Add product</button>} description="Edit prices, descriptions, categories, featured items and product galleries." eyebrow="Catalogue" title="Products" />
                 <label className="field admin-search"><span>Find a product</span><input type="search" placeholder="Search by name or category" value={search} onChange={(event) => setSearch(event.target.value)} /></label>
-                <p className="admin-editor-hint">Add up to four images per publish. Images are automatically resized and optimized.</p>
+                <p className="admin-editor-hint">Add up to 10 photos per product. Choose several at once, arrange the order and select the cover photo. Photos are automatically optimized.</p>
                 {!document.content.catalog.products.some((product) => `${product.name} ${product.category}`.toLowerCase().includes(search.toLowerCase().trim())) ? <p className="admin-empty">No products match. Try another search or add a product.</p> : null}
                 <div className="admin-editor-list">{document.content.catalog.products.map((product, index) => ({ product, index })).filter(({ product }) => `${product.name} ${product.category}`.toLowerCase().includes(search.toLowerCase().trim())).map(({ product, index }) => <article className="admin-editor-card admin-product-editor" key={product.id}>
-                  <div className="admin-product-image">{product.image ? <Image alt={product.name} fill sizes="180px" src={imageSource(product.image)} unoptimized /> : <span>{product.name.slice(0, 1)}</span>}<label><input aria-label={`Upload image for ${product.name}`} accept="image/png,image/jpeg,image/webp,image/avif" onChange={(event) => void uploadProductImage(event, product.id)} type="file" />{uploading ? "Preparing image…" : product.image ? "Replace image" : "Add image"}</label></div>
+                  <ProductGalleryEditor imageSource={imageSource} onMakeCover={(path) => makeProductCover(product.id, path)} onMove={(path, direction) => moveProductImage(product.id, path, direction)} onRemove={(path) => removeProductImage(product.id, path)} onUpload={(files) => void uploadProductImages(files, product.id)} product={product} uploading={uploading} />
                   <div className="admin-editor-fields"><div className="field-grid"><label className="field"><span>Product name</span><input onChange={(event) => edit((content) => { content.catalog.products[index].name = event.target.value; })} value={product.name} /></label><label className="field"><span>Category</span><input list="admin-categories" onChange={(event) => edit((content) => { content.catalog.products[index].category = event.target.value; })} value={product.category} /></label></div>
                     <div className="field-grid"><label className="field"><span>Price (KSh)</span><input min="0" onChange={(event) => edit((content) => { content.catalog.products[index].price = Number(event.target.value); })} type="number" value={product.price} /></label><label className="admin-check"><input checked={product.featured} onChange={(event) => edit((content) => { content.catalog.products[index].featured = event.target.checked; })} type="checkbox" /><span>Feature on homepage</span></label></div>
                     <label className="field"><span>Description</span><textarea onChange={(event) => edit((content) => { content.catalog.products[index].description = event.target.value; })} rows={3} value={product.description} /></label>
-                    <div className="admin-card-actions">{product.image ? <button onClick={() => removeProductImage(product.id)} type="button">Remove image</button> : null}<button className="danger" onClick={() => deleteProduct(product.id)} type="button">Delete product</button></div>
+                    <div className="admin-card-actions"><button className="danger" onClick={() => deleteProduct(product.id)} type="button">Delete product</button></div>
                   </div>
                 </article>)}</div><datalist id="admin-categories">{document.content.catalog.categories.map((category) => <option key={category} value={category} />)}</datalist>
               </section> : null}

@@ -18,6 +18,10 @@ export const journal = journalData;
 export const reviews = reviewsData as { schemaVersion: number; reviews: Review[] };
 export const site = siteData;
 
+export function productImages(product: Product) {
+  return product.images.filter(Boolean);
+}
+
 export function formatPrice(price: number) {
   return new Intl.NumberFormat("en-KE", {
     style: "currency",

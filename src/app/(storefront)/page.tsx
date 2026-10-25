@@ -7,7 +7,7 @@ import { PackageCard } from "@/components/storefront/package-card";
 import { ProductCard } from "@/components/storefront/product-card";
 import { SectionHeading } from "@/components/storefront/section-heading";
 import { ArrowRight, ArrowUpRight, Clock, Gift, Heart, Sparkle } from "@/components/ui/icons";
-import { catalog, site } from "@/lib/content";
+import { catalog, productImages, site } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Personalized Gifts in Nairobi",
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const featured = catalog.products.filter((product) => product.featured).slice(0, 8);
-  const heroProduct = featured.find((product) => product.image) ?? catalog.products.find((product) => product.image);
-  const storyProduct = catalog.products.find((product) => product.id === "own-item" && product.image)
-    ?? catalog.products.find((product) => product.image);
+  const heroProduct = featured.find((product) => productImages(product).length) ?? catalog.products.find((product) => productImages(product).length);
+  const storyProduct = catalog.products.find((product) => product.id === "own-item" && productImages(product).length)
+    ?? catalog.products.find((product) => productImages(product).length);
 
   return (
     <>
@@ -72,7 +72,7 @@ export default function HomePage() {
                 className="story-art__image"
                 fill
                 sizes="(max-width: 820px) 100vw, 42vw"
-                src={storyProduct.image}
+                src={productImages(storyProduct)[0]}
               />
             ) : null}
           </div>

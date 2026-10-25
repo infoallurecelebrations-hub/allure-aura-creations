@@ -2,7 +2,7 @@ import { ArrowUpRight } from "@/components/ui/icons";
 import { formatPrice, type Product } from "@/lib/content";
 import Link from "next/link";
 
-import { ProductArt } from "./product-art";
+import { ProductGallery } from "./product-gallery";
 
 export function ProductCard({ product }: { product: Product }) {
   const query = new URLSearchParams({ product: product.id });
@@ -10,7 +10,7 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <article className="product-card">
       <div className="product-card__visual">
-        <ProductArt product={product} />
+        <ProductGallery product={product} />
         <span className="product-card__category">{product.category}</span>
       </div>
       <div className="product-card__body">

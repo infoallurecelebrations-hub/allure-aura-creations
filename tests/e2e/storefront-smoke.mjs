@@ -49,7 +49,7 @@ try {
       const clipped = await page.locator("main input, main textarea, main select, .product-card, .package-card, .contact-methods a").evaluateAll((elements) => elements.filter((element) => { const rect = element.getBoundingClientRect(); return rect.width && (rect.right > innerWidth + 1 || rect.left < -1); }).length);
       assert.equal(clipped, 0, `${path} clipped content at ${width}px`);
       await page.evaluate(() => window.scrollTo({ top: document.body.scrollHeight, behavior: "instant" }));
-      await page.waitForFunction(() => [...document.images].filter((image) => image.getBoundingClientRect().top < innerHeight).every((image) => image.complete && image.naturalWidth > 0));
+      await page.waitForFunction(() => [...document.images].filter((image) => { const rect = image.getBoundingClientRect(); return rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.top < innerHeight; }).every((image) => image.complete && image.naturalWidth > 0));
       await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
       await page.waitForFunction(() => window.scrollY === 0);
       if ([390, 1440].includes(width)) await page.screenshot({ path: `test-results/storefront/${path.slice(1) || "home"}-${width}.png`, fullPage: true, caret: "initial" });
@@ -82,6 +82,11 @@ try {
     assert.ok((await card.textContent()).includes(format(product.price)));
     assert.equal(new URL(await card.getByRole("link").getAttribute("href"), base).searchParams.get("product"), product.id);
   }
+  const firstGallery = page.locator(".product-card").first();
+  await firstGallery.getByRole("button", { name: new RegExp(`Open ${catalog.products[0].name} image gallery`) }).click();
+  await page.getByRole("dialog", { name: `${catalog.products[0].name} image gallery` }).waitFor();
+  await page.getByRole("button", { name: "Close image gallery" }).click();
+  await page.getByRole("dialog", { name: `${catalog.products[0].name} image gallery` }).waitFor({ state: "hidden" });
   await page.locator(".product-card").first().getByRole("link").click();
   assert.equal(await page.locator('[name="item"]').inputValue(), catalog.products[0].name);
   assert.equal(await page.getByLabel("Displayed starting price", { exact: true }).inputValue(), format(catalog.products[0].price));

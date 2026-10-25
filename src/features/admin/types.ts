@@ -5,7 +5,7 @@ export type AdminProduct = {
   price: number;
   description: string;
   featured: boolean;
-  image: string;
+  images: string[];
 };
 
 export type AdminPackage = {
