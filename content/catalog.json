@@ -48,7 +48,14 @@
       "description": "A thoughtful everyday cup finished with your chosen name or words.",
       "featured": true,
       "images": [
-        "/uploads/products/ceramic-8a85bbbf-f9cc-4ac2-96a4-16f561692f66.webp"
+        "/uploads/products/ceramic-8a85bbbf-f9cc-4ac2-96a4-16f561692f66.webp",
+        "/uploads/products/ceramic-0a7cfd39-0540-4bd3-be99-7e20c0ffa14a.webp",
+        "/uploads/products/ceramic-756c7af3-3494-486d-a77d-19f972b435ab.webp",
+        "/uploads/products/ceramic-8de95ad5-0c14-4f53-95d5-4728806f9db8.webp",
+        "/uploads/products/ceramic-cf076c25-7395-4e7a-99a3-ed556ffbe5c7.webp",
+        "/uploads/products/ceramic-a93aeec8-0aee-406a-91a1-e2885aaebdf7.webp",
+        "/uploads/products/ceramic-b19bfdfa-2dde-4acf-890f-2329d9476636.webp",
+        "/uploads/products/ceramic-31bce994-8ed3-47ba-96e8-21aa1d1fffd3.webp"
       ]
     },
     {
@@ -59,7 +66,8 @@
       "description": "Name or short-text rhinestone customization, priced per glass.",
       "featured": true,
       "images": [
-        "/uploads/products/wine-7d4166d4-1777-4269-9f1c-60325e7dea73.webp"
+        "/uploads/products/wine-7d4166d4-1777-4269-9f1c-60325e7dea73.webp",
+        "/uploads/products/wine-677bd127-6774-4638-b79d-2c248e617e25.webp"
       ]
     },
     {
